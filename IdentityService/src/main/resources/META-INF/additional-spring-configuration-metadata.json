@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "plugin-service-url",
+      "type": "java.lang.String",
+      "description": "Description for plugin-service-url."
+    },
+    {
+      "name": "comment-service-url",
+      "type": "java.lang.String",
+      "description": "Description for comment-service-url."
+    }
+  ]
+}

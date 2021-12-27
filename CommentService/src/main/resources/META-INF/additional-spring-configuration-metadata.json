@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "plugin-service-url",
+      "type": "java.lang.String",
+      "description": "URL to reach the Plugin service endpoints."
+    },
+    {
+      "name": "identity-service-url",
+      "type": "java.lang.String",
+      "description": "URL to reach the Identity service endpoints."
+    }
+  ]
+}

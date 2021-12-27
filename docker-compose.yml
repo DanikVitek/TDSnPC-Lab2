@@ -1,0 +1,54 @@
+services:
+  mc-pl-mariadb:
+    image: mariadb
+    container_name: mc-pl-mariadb
+    volumes:
+      - mc-pl-data:/var/lib/mariadb/data
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_DATABASE=course_project
+      - MARIADB_ROOT_PASSWORD=
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+
+  mc-pl-comment-service:
+    build: ./CommentService
+    container_name: mc-pl-comment-service
+    ports:
+      - 8081:8081
+    environment:
+      - DB_SERVER=mc-pl-mariadb
+      - DB_NAME=course_project
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+      - PLUGIN_SERVICE_URL=http://mc-pl-plugin-service
+      - IDENTITY_SERVICE_URL=http://mc-pl-identity-service
+
+  mc-pl-identity-service:
+    build: ./IdentityService
+    container_name: mc-pl-identity-service
+    ports:
+      - 8082:8082
+    environment:
+      - DB_SERVER=mc-pl-mariadb
+      - DB_NAME=course_project
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+      - SECRET=secret
+      - PLUGIN_SERVICE_URL=http://mc-pl-plugin-service
+      - COMMENT_SERVICE_URL=http://mc-pl-comment-service
+
+  mc-pl-plugin-service:
+    build: ./PluginService
+    container_name: mc-pl-identity-service
+    ports:
+      - 8083:8083
+    environment:
+      - DB_SERVER=mc-pl-mariadb
+      - DB_NAME=course_project
+      - DB_USERNAME=root
+      - DB_PASSWORD=
+      - IDENTITY_SERVICE_URL=http://mc-pl-identity-service
+
+volumes:
+  mc-pl-data:

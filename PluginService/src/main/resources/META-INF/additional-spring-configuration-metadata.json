@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "identity-service-url",
+      "type": "java.lang.String",
+      "description": "Description for identity-service-url."
+    }
+  ]
+}
