@@ -40,7 +40,7 @@ services:
 
   mc-pl-plugin-service:
     build: ./PluginService
-    container_name: mc-pl-identity-service
+    container_name: mc-pl-plugin-service
     ports:
       - 8083:8083
     environment:

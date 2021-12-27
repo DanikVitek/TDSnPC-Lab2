@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: identity-service
+spec:
+  selector:
+    app: identity-service
+  type: NodePort
+  ports:
+    - name: http
+      port: 8082
+      nodePort: 31001
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-service
+spec:
+  selector:
+    matchLabels:
+      app: identity-service
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      containers:
+        - name: server
+          env:
+            - name: DB_SERVER
+              value: localhost:3306
+            - name: DB_NAME
+              value: course_project
+            - name: DB_USERNAME
+              value: root
+            - name: DB_PASSWORD
+              value: ""
+            - name: SECRET
+              value: secret
+            - name: PLUGIN_SERVICE_URL
+              value: http://localhost:8083
+            - name: COMMENT_SERVICE_URL
+              value: http://localhost:8081
+          image: danikvitek/identity-service
+          ports:
+            - name: http
+              containerPort: 8082
+
+---
