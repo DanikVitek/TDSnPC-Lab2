@@ -28,18 +28,18 @@ spec:
         app: plugin-service
     spec:
       containers:
-        - name: server
+        - name: plugin-service
           env:
             - name: DB_SERVER
-              value: localhost:3306
+              value: mariadb:3306
             - name: DB_NAME
               value: course_project
             - name: DB_USERNAME
               value: root
             - name: DB_PASSWORD
-              value: ""
+              value: password
             - name: IDENTITY_SERVICE_URL
-              value: http://localhost:8082
+              value: http://identity-service:8082
           image: danikvitek/plugin-service
           ports:
             - name: http

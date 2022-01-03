@@ -28,20 +28,20 @@ spec:
         app: comment-service
     spec:
       containers:
-        - name: server
+        - name: comment-service
           env:
             - name: DB_SERVER
-              value: localhost:3306
+              value: mariadb:3306
             - name: DB_NAME
               value: course_project
             - name: DB_USERNAME
               value: root
             - name: DB_PASSWORD
-              value: ""
+              value: password
             - name: PLUGIN_SERVICE_URL
-              value: http://localhost:8083
+              value: http://plugin-service:8083
             - name: IDENTITY_SERVICE_URL
-              value: http://localhost:8082
+              value: http://identity-service:8082
           image: danikvitek/comment-service
           ports:
             - name: http
